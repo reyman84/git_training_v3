@@ -1,2 +1,1 @@
 SampleTestFile2.txt
-Testing Git Revert 1
