@@ -1,2 +1,0 @@
-SampleTestFile2
-Testing reset Commit 2
