@@ -1,3 +1,1 @@
-fdfsdf ampleTestFile1.txt
-
-DevOps with Jenkins Terraform GIT Docker Maven Kubernetes Ansible Automation Docker Swarm, DevOps Real world Exercises
+newfile
