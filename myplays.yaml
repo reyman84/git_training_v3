@@ -47,8 +47,9 @@
         name: newfolder
         state: directory
 
-    - name: Rename a directory
-      ansible.builtin.file:
-        src: newfolder
-        path: pathchanged
-        state: moved
+    - name: Rename directory
+      ansible.builtin.command:
+        cmd: mv newfolder path_changed
+      args:
+        removes: newfolder
+        creates: path_changed
