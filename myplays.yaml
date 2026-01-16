@@ -15,7 +15,7 @@
 
     - name: Validate empty file is created
       debug:
-        var: empty_out
+        msg: empty_out.changed
     - name: Create file with content
       ansible.builtin.copy:
         dest: contentfile
