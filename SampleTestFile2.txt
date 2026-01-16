@@ -1,2 +1,0 @@
-SampleTestFile2.txt
-This is comparison lecture, Change in file2

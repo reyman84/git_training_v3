@@ -1,0 +1,30 @@
+- name: Creating file and directories
+  hosts: localhost
+  become: yes
+  become_user: root
+
+  tasks:
+    - name: Creating empty file
+      ansible.builtin.file:
+        name: emptyfile
+        state: touch
+        mode: '0644'
+        owner: ansible
+        group: ansible
+      register: empty_out
+
+    - name: Validate empty file is created
+      debug:
+        var: empty_out
+    - name: Create file with content
+      ansible.builtin.copy:
+        dest: contentfile
+        content: |
+          Creating a new file with content
+        mode: '0644'
+        owner: ansible
+        group: ansible
+    - name: Creating directory
+      ansible.builtin.file:
+        name: newfolder
+        state: directory
