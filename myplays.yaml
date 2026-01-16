@@ -50,5 +50,5 @@
     - name: Rename a directory
       ansible.builtin.file:
         src: newfolder
-        dest: path_changed
+        path: path_changed
         state: moved
