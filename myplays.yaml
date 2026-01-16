@@ -22,6 +22,7 @@
         dest: contentfile
         content: |
           Creating a new file with content
+          I am adding a new line to validate debug
         mode: '0644'
         owner: ansible
         group: ansible
