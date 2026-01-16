@@ -31,6 +31,17 @@
     - name: Validate empty file
       debug:
         msg: "{{contentfile_out.changed}}"
+
+    - name: validate the stat of file
+      ansible.builtin.stat:
+        path: /tmp/newfile.txt
+      register: stat_out
+      
+    - name: check the status
+      debug:
+        msg: "File exits"
+      when: stat_out.stat.exists
+
     - name: Creating directory
       ansible.builtin.file:
         name: newfolder
