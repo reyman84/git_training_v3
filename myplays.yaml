@@ -53,3 +53,9 @@
       args:
         removes: newfolder
         creates: path_changed
+
+    - name: symlink
+      ansible.builtin.file:
+        src: /home/ansible/ansible/playbooks/myplays.yaml
+        dest: /tmp/myplays.yaml
+        state: link
