@@ -51,4 +51,4 @@
       ansible.builtin.file:
         src: newfolder
         dest: path_changed
-        state: moved
+        #state: moved
