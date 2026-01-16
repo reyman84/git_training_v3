@@ -16,6 +16,7 @@
     - name: Validate empty file is created
       debug:
         msg: "{{empty_out.changed}}"
+
     - name: Create file with content
       ansible.builtin.copy:
         dest: contentfile
@@ -24,6 +25,11 @@
         mode: '0644'
         owner: ansible
         group: ansible
+      register: contentfile_out
+
+    - name: Validate empty file
+      debug:
+        msg: "{{contentfile_out.changed}}"
     - name: Creating directory
       ansible.builtin.file:
         name: newfolder
