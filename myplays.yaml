@@ -56,6 +56,6 @@
 
     - name: symlink
       ansible.builtin.file:
-        src: /home/ansible/ansible/playbooks/myplays.yaml
+        src: /home/ansible/ansible/git_training_v3/myplays.yaml
         dest: /tmp/myplays.yaml
         state: link
