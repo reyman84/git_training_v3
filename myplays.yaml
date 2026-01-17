@@ -56,7 +56,7 @@
         state: started
         enabled: yes
 
-    - name: Start and enable Nginx
+    - name: Downloading zip format URL
       ansible.builtin.get_url:
         url: https://www.tooplate.com/zip-templates/2149_strategic_consulting.zip
         dest: /tmp/2149_strategic_consulting.zip
@@ -65,6 +65,7 @@
       ansible.builtin.unarchive:
         src: /tmp/2149_strategic_consulting.zip
         dest: /var/www/html
+        remote_src: true
       notify: Restart Nginx
 
 #    - name: Web Page content
