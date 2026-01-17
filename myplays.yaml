@@ -39,5 +39,5 @@
         hour: "3"
         day: "*"
         month: "*"
-        workday: "1"
+        weekday: "1"
         job: "/tmp/script.sh"
