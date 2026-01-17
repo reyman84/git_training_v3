@@ -46,9 +46,12 @@
 # Create web page
     - name: Install nginx
       ansible.builtin.package:
-        name: nginx
+        name: "{{ item }}"
         state: present
         update_cache: yes
+      loop: 
+        - nginx
+        - unzip
 
     - name: Start and enable Nginx
       ansible.builtin.service:
@@ -66,7 +69,7 @@
       ansible.builtin.unarchive:
         src: /tmp/2149_strategic_consulting.zip
         dest: /tmp
-        #remote_src: yes
+        remote_src: yes
       notify: Restart Nginx
 
 #    - name: Web Page content
