@@ -72,19 +72,6 @@
         remote_src: yes
       notify: Restart Nginx
 
-    - name: Copying to /var/www/html/
-      ansible.builtin.copy:
-        src: /var/www/html/2149_strategic_consulting/
-        dest: /var/www/html/
-        remote_src: yes
-      notify: Restart Nginx
-
-    - name: Web Page content
-      ansible.builtin.file:
-        dest: /var/www/html/index.html
-        state: absent
-      notify: Restart Nginx
-
   handlers:
     - name: Restart Nginx
       ansible.builtin.service:
