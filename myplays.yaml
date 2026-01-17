@@ -41,3 +41,4 @@
         month: "*"
         weekday: "1"
         job: "/tmp/script.sh"
+        user: ansible
