@@ -56,16 +56,17 @@
         state: started
         enabled: yes
 
-    - name: Downloading zip format URL
+    - name: Download Strategic Consulting template
       ansible.builtin.get_url:
         url: https://www.tooplate.com/zip-templates/2149_strategic_consulting.zip
         dest: /tmp/2149_strategic_consulting.zip
+        mode: '0644'
 
-    - name: Unzip 'zip' format
-      ansible.builtin.unzip:
+    - name: Extract website files
+      ansible.builtin.unarchive:
         src: /tmp/2149_strategic_consulting.zip
         dest: /var/www/html
-        remote_src: true
+        remote_src: yes
       notify: Restart Nginx
 
 #    - name: Web Page content
