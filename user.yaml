@@ -1,0 +1,13 @@
+# Create groups and users
+- name: Create groups
+  ansible.builtin.group:
+    name: "{{ item.value }}"
+    state: present
+  loop: "{{ user_group_map | dict2items }}"
+
+- name: Create users
+  ansible.builtin.user:
+    name: "{{ item.key }}"
+    group: "{{ item.value }}"
+    create_home: true
+  loop: "{{ user_group_map | dict2items }}"

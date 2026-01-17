@@ -1,0 +1,20 @@
+- name: Executing all Ansible modules
+  hosts: localhost
+  become: yes
+
+  vars:
+    user_group_map:
+      raman: amritsar
+      ganeev: bengaluru
+    packages: [ 'nginx', 'unzip' ]
+
+  tasks:
+    - name: Create Users and groups
+      import: user.yaml
+
+    - name: Create cronjob
+      import: cron.yaml
+      
+    - name: Create Website
+      import: webserver.yaml
+      

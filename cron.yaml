@@ -1,0 +1,21 @@
+# Create Cron job
+- name: Script file
+  ansible.builtin.copy:
+    dest: /tmp/script.sh
+    mode: '0755'
+    content: |
+      Sample Script file for cronjob
+    owner: ansible
+    group: ansible
+
+- name: Cron job
+  ansible.builtin.cron:
+    name: Cronjob for testing
+    minute: "30"
+    hour: "3"
+    day: "*"
+    month: "*"
+    weekday: "1"
+    job: "/tmp/script.sh"
+    user: ansible
+

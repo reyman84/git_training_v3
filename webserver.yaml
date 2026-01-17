@@ -1,0 +1,32 @@
+# Create web page
+- name: Install nginx and unzip
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop: "{{ packages }}"
+
+- name: Start and enable Nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Download Strategic Consulting template
+  ansible.builtin.get_url:
+    url: https://www.tooplate.com/zip-templates/2149_strategic_consulting.zip
+    dest: /tmp/2149_strategic_consulting.zip
+    mode: '0644'
+
+- name: Extract website files
+  ansible.builtin.unarchive:
+    src: /tmp/2149_strategic_consulting.zip
+    dest: /var/www/html/
+    remote_src: yes
+  notify: Restart Nginx
+
+  handlers:
+- name: Restart Nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
