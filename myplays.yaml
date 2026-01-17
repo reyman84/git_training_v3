@@ -35,6 +35,12 @@
     - name: Cron job
       ansible.builtin.cron:
         name: Cronjob for testing
+        state: absent
+        user: root
+
+    - name: Cron job
+      ansible.builtin.cron:
+        name: Cronjob for testing
         minute: "30"
         hour: "3"
         day: "*"
