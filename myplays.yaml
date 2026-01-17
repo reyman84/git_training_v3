@@ -42,3 +42,30 @@
         weekday: "1"
         job: "/tmp/script.sh"
         user: ansible
+
+# Create web page
+    - name: Install nginx
+      ansible.builtin.package:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Start and enable Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Web Page content
+      ansible.builtin.copy:
+        dest: /var/www/html/index.html
+        content: |
+          Content for Nginx webpage
+        mode: '644'
+      notify: Restart Nginx
+
+  handlers:
+    - name: Restart Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
