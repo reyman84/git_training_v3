@@ -56,13 +56,24 @@
         state: started
         enabled: yes
 
-    - name: Web Page content
-      ansible.builtin.copy:
-        dest: /var/www/html/index.html
-        content: |
-          Content for Nginx webpage
-        mode: '644'
-      notify: Restart Nginx
+    - name: Start and enable Nginx
+      get_url:
+        url: https://www.tooplate.com/zip-templates/2149_strategic_consulting.zip
+        dest: /tmp/2149_strategic_consulting.zip
+
+    - name: Unarchieve zip format
+      unarchieve: 
+        src: /tmp/2149_strategic_consulting.zip
+        dest: /var/www/html
+      notify:: Restart Nginx
+      
+#    - name: Web Page content
+#      ansible.builtin.copy:
+#        dest: /var/www/html/index.html
+#        content: |
+#          Content for Nginx webpage
+#        mode: '644'
+#      notify: Restart Nginx
 
   handlers:
     - name: Restart Nginx
