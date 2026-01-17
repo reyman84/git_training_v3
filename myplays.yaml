@@ -6,6 +6,7 @@
     user_group_map:
       raman: amritsar
       ganeev: bengaluru
+    packages: [ 'nginx', 'unzip' ]
 
   tasks:
 # Create groups and users
@@ -49,9 +50,7 @@
         name: "{{ item }}"
         state: present
         update_cache: yes
-      loop: 
-        - nginx
-        - unzip
+      loop: "{{ packages }}"
 
     - name: Start and enable Nginx
       ansible.builtin.service:
