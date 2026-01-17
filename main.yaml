@@ -10,10 +10,10 @@
 
   tasks:
     - name: Create Users and groups
-      import: user.yaml
+      import_tasks: user.yaml
 
     - name: Create cronjob
-      import: cron.yaml
+      import_tasks: cron.yaml
 
     - name: Create Website
-      import: webserver.yaml
+      import_tasks: webserver.yaml
