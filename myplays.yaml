@@ -1,61 +1,43 @@
-- name: Creating file and directories
+- name: Executing all Ansible modules
   hosts: localhost
   become: yes
-  become_user: root
+
+  vars:
+    user_group_map:
+      raman: amritsar
+      ganeev: bengaluru
 
   tasks:
-    - name: Creating empty file
-      ansible.builtin.file:
-        name: emptyfile
-        state: touch
-        mode: '0644'
-        owner: ansible
-        group: ansible
-      register: empty_out
+# Create groups and users
+    - name: Create groups
+      ansible.builtin.group:
+        name: "{{ item.value }}"
+        state: present
+      loop: "{{ user_group_map | dict2items }}"
 
-    - name: Validate empty file is created
-      debug:
-        msg: "{{empty_out.changed}}"
+    - name: Create users
+      ansible.builtin.user:
+        name: "{{ item.key }}"
+        group: "{{ item.value }}"
+        create_home: true
+      loop: "{{ user_group_map | dict2items }}"
 
-    - name: Create file with content
+# Create Cron job
+    - name: Script file
       ansible.builtin.copy:
-        dest: contentfile
+        dest: /tmp/script.sh
+        mode: '0755'
         content: |
-          Creating a new file with content
-          I am adding a new line to validate debug
-        mode: '0644'
+          Sample Script file for cronjob
         owner: ansible
         group: ansible
-      register: contentfile_out
 
-    - name: Validate empty file
-      debug:
-        msg: "{{contentfile_out.changed}}"
-
-    - name: validate the stat of file
-      ansible.builtin.stat:
-        path: /tmp/newfile.txt
-      register: stat_out
-      
-    - name: check the status
-      debug:
-        msg: "File exits"
-      when: stat_out.stat.exists
-
-    - name: Creating directory
-      ansible.builtin.file:
-        name: newfolder
-        state: directory
-
-    - name: Rename directory
-      ansible.builtin.command:
-        cmd: mv newfolder path_changed
-      args:
-        removes: newfolder
-        creates: path_changed
-
-    - name: symlink
-      ansible.builtin.file:
-        src: /home/ansible/ansible/git_training_v3/myplays.yaml
-        dest: /tmp/myplays.yaml
-        state: link
+    - name: Cron job
+      ansible.builtin.cron:
+        name: Cronjob for testing
+        minute: "30"
+        hour: "3"
+        day: "*"
+        month: "*"
+        workday: "1"
+        job: "/tmp/script.sh"
