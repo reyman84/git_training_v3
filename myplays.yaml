@@ -68,7 +68,7 @@
     - name: Extract website files
       ansible.builtin.unarchive:
         src: /tmp/2149_strategic_consulting.zip
-        dest: /tmp
+        dest: /var/www/html/
         remote_src: yes
       notify: Restart Nginx
 
