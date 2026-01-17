@@ -8,18 +8,18 @@
       ganeev: bengaluru
     packages: [ 'nginx', 'unzip' ]
     docker_packages_to_remove: [ 'docker.io', 'docker-compose', 'docker-compose-v2', 'docker-doc', 'podman-docker', 'containerd', 'runc' ]
-    docker_installation: [ 'ca-certificates', 'curl', 'gnupg', 'lsb-release' ]  
-    docker_package: [ docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-compose' ]
+    docker_prerequisite_packages: [ 'ca-certificates', 'curl', 'gnupg', 'lsb-release' ]  
+    docker_package: [ 'docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-compose' ]
 
   tasks:
-    - name: Create Users and groups
-      import_tasks: playbooks/user.yaml
+#    - name: Create Users and groups
+#      import_tasks: playbooks/user.yaml
 
-    - name: Create cronjob
-      import_tasks: playbooks/cron.yaml
+#    - name: Create cronjob
+#      import_tasks: playbooks/cron.yaml
 
-    - name: Create Website
-      import_tasks: playbooks/webserver.yaml
+#    - name: Create Website
+#      import_tasks: playbooks/webserver.yaml
 
     - name: Docker installation
       import_tasks: playbooks/docker.yaml
