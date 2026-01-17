@@ -10,17 +10,16 @@
 
   tasks:
     - name: Create Users and groups
-      import_tasks: user.yaml
+      import_tasks: playbooks/user.yaml
 
     - name: Create cronjob
-      import_tasks: cron.yaml
+      import_tasks: playbooks/cron.yaml
 
     - name: Create Website
-      import_tasks: webserver.yaml
+      import_tasks: playbooks/webserver.yaml
 
   handlers:
     - name: Restart Nginx
       ansible.builtin.service:
        name: nginx
        state: restarted
-       
