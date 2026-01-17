@@ -61,8 +61,8 @@
         url: https://www.tooplate.com/zip-templates/2149_strategic_consulting.zip
         dest: /tmp/2149_strategic_consulting.zip
 
-    - name: Unarchive zip format
-      ansible.builtin.unarchive:
+    - name: Unzip 'zip' format
+      ansible.builtin.unzip:
         src: /tmp/2149_strategic_consulting.zip
         dest: /var/www/html
         remote_src: true
