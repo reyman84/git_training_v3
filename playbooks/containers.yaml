@@ -1,0 +1,9 @@
+- name: Start and Enable docker service
+  ansible.builtin.service:
+    name: docker
+    state: started
+  register: dockerservice_out
+
+- name: Print docker status
+  ansible.builtin.debug:
+    var: "{{ dockerservice_out }}"

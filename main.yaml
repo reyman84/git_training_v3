@@ -21,8 +21,11 @@
 #    - name: Create Website
 #      import_tasks: playbooks/webserver.yaml
 
-    - name: Docker installation
-      import_tasks: playbooks/docker.yaml
+#    - name: Docker installation
+#      import_tasks: playbooks/docker.yaml
+
+    - name: Creating Nginx and mysql container
+      import_tasks: playbooks/containers.yaml
 
   handlers:
     - name: Restart Nginx
