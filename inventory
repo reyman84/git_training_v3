@@ -1,2 +1,2 @@
-[localhost]
-172.31.102.155
+[local]
+localhost ansible_connection=local
