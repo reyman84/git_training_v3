@@ -9,7 +9,7 @@
     packages: [ 'nginx', 'unzip' ]
     docker_packages_to_remove: [ 'docker.io', 'docker-compose', 'docker-compose-v2', 'docker-doc', 'podman-docker', 'containerd', 'runc' ]
     docker_prerequisite_packages: [ 'ca-certificates', 'curl', 'gnupg', 'lsb-release' ]  
-    docker_package: [ 'docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-compose' ]
+    docker_packages: [ 'docker-ce', 'docker-ce-cli', 'containerd.io', 'docker-compose' ]
 
   tasks:
 #    - name: Create Users and groups
