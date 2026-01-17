@@ -25,8 +25,3 @@
     remote_src: yes
   notify: Restart Nginx
 
-  handlers:
-- name: Restart Nginx
-  ansible.builtin.service:
-    name: nginx
-    state: restarted

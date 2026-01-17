@@ -17,3 +17,10 @@
 
     - name: Create Website
       import_tasks: webserver.yaml
+
+  handlers:
+    - name: Restart Nginx
+      ansible.builtin.service:
+       name: nginx
+       state: restarted
+       
