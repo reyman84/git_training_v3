@@ -44,16 +44,14 @@
         user: ansible
 
 # Create web page
-    - name: Install nginx
+    - name: Install nginx and unzip
       ansible.builtin.package:
-        name: nginx
+        name: "{{ item }}"
         state: present
         update_cache: yes
-
-    - name: Install unzip
-      ansible.builtin.package:
-        name: unzip
-        state: present
+      loop: 
+        - nginx
+        - unzip
 
     - name: Start and enable Nginx
       ansible.builtin.service:
