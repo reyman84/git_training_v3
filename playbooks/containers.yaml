@@ -7,3 +7,11 @@
 - name: Print docker status
   ansible.builtin.debug:
     var: "{{ dockerservice_out.status.ActiveState }}"
+
+- name: Pull nginx and mysql images
+  community.docker.docker_image:
+    name: "{{ item }}"
+    source: pull
+  loop: 
+    - nginx
+    - mysql:5.6
