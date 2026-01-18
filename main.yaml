@@ -1,3 +1,4 @@
+#!/home/ansible/ansible/DEV/bin/ansible-playbook
 - name: Executing all Ansible modules
   hosts: localhost
   become: yes
