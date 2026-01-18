@@ -6,7 +6,7 @@
 
 - name: Print docker status
   ansible.builtin.debug:
-    var: "{{ dockerservice_out.status.ActiveState }}"
+    msg: "Docker service is: {{ dockerservice_out.status.ActiveState }}"
 
 - name: Pull nginx and mysql images
   community.docker.docker_image:
