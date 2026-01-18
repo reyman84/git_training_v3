@@ -1,7 +1,7 @@
 - name: Start and Enable docker service
   ansible.builtin.service:
     name: docker
-    state: stopped
+    state: started
   register: dockerservice_out
 
 - name: Print docker status
