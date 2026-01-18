@@ -15,3 +15,4 @@
   loop: 
     - nginx
     - mysql:5.6
+  register: images_out
