@@ -29,7 +29,7 @@
   community.docker.docker_container:
     name: mymysqlcontainer
     image: mysql:5.6
-    env:
+    env:  # Credentials can be change, as required
       MYSQL_ROOT_PASSWORD: ansible
       MYSQL_USER: ansible
       MYSQL_PASSWORD: ansible
