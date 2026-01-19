@@ -17,6 +17,10 @@
     - mysql:5.6
   register: images_out
 
-- name: Print Images
-  ansible.builtin.debug:
-    msg: "{{ images_out }}"
+- name: Create nginx container
+  community.docker.docker_container:
+    name: mynginxcontainer
+    image: nginx:latest
+    state: started
+    ports: 
+      - "80:80"
