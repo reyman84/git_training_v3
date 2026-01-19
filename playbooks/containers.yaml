@@ -23,4 +23,4 @@
     image: nginx:latest
     state: started
     ports: 
-      - "80:80"
+      - "8080:80"
