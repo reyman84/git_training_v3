@@ -1,29 +1,26 @@
-- name: Start and Enable docker service
-  ansible.builtin.service:
+- name: Start Docker service
+  service:
     name: docker
     state: started
-  register: dockerservice_out
+    enabled: yes
 
-- name: Print docker status
-  ansible.builtin.debug:
-    msg: "Docker service is: {{ dockerservice_out.status.ActiveState }}"
-
-- name: Pull nginx and mysql images
+- name: Pull Nginx image
   community.docker.docker_image:
-    name: "{{ item }}"
+    name: nginx
     source: pull
-  loop: 
-    - nginx
-    - mysql:5.6
-  register: images_out
 
-- name: Create nginx container
+- name: Pull mysql image
+  community.docker.docker_image:
+    name: mysql:5.6
+    source: pull
+
+- name: Create and start Nginx container
   community.docker.docker_container:
-    name: mynginxcontainer
-    image: nginx:latest
+    name: nginx_container
+    image: nginx
     state: started
-    ports: 
-      - "8080:80"
+    ports:
+      - "80:80"
 
 - name: Create mysql container
   community.docker.docker_container:
@@ -38,3 +35,48 @@
     ports: 
       - "3306:3306"
     restart_policy: always
+
+- name: Ensure Nginx container is running
+  community.docker.docker_container_info:
+    name: nginx_container
+  register: nginx_info
+
+- name: Debug Nginx container status
+  debug:
+    msg: "Nginx container status: {{ nginx_info.container.State.Status }}"
+
+- name: Ensure mysql container is running
+  community.docker.docker_container_info:
+    name: mysql_container
+  register: mysql_info
+
+- name: Debug mysql container status
+  debug:
+    msg: "mysql container status: {{ mysql_info.container.State.Status }}"
+
+- name: Show all running containers before termination
+  command: docker ps --format "{{'{{'}}.Names{{'}}'}}"
+  register: all_containers_before
+
+- name: Debug all running containers before termination
+  debug:
+    msg: "All running containers before termination: {{ all_containers_before.stdout_lines }}"
+
+# Remove containers
+#- name: Terminate Nginx container
+#  community.docker.docker_container:
+#    name: nginx_container
+#    state: absent
+#
+#- name: Terminate mysql container
+#  community.docker.docker_container:
+#    name: mysql_container
+#    state: absent
+#
+#- name: Show all running containers after termination
+#  command: docker ps --format "{{'{{'}}.Names{{'}}'}}"
+#  register: all_containers_after
+#
+#- name: Debug all running containers after termination
+#  debug:
+#    msg: "All running containers after termination: {{ all_containers_after.stdout_lines }}"
